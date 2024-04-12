@@ -1,9 +1,11 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { DarkTheme, DefaultTheme, NavigationContainer, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { SplashScreen, Stack, Tabs } from 'expo-router';
-import { useEffect } from 'react';
+import { Navigator, SplashScreen, Stack, Tabs } from 'expo-router';
+import { User, onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
+import { FIREBASE_AUTH } from '../config/firebaseConfig';
 
 export {
   ErrorBoundary,
@@ -14,11 +16,11 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="list" options={{ title: "My Books", headerLeft: () => null }} />
-        <Stack.Screen name="profile" options={{ title: "My Profile" }} />
-        <Stack.Screen name="login" options={{ title: "Login" }} />
-      </Stack>
+        <Stack>
+          <Stack.Screen name="login" options={{ title: "Sign In" }} />
+          <Stack.Screen name="signUp" options={{ title: "Sign Up" }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false, headerLeft: () => null }} />
+        </Stack>
     </ThemeProvider>
   );
 }

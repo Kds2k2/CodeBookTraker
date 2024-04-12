@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react'
  
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Ionicons } from '@expo/vector-icons';
-import { getBookByISBN } from '../api/books';
+import { getBookByISBN } from '../../api/books';
 
 import { addDoc, collection, onSnapshot, serverTimestamp } from 'firebase/firestore';
-import { FIRESOTRE_DB } from '../config/firebaseConfig';
+import { FIRESOTRE_DB } from '../../config/firebaseConfig';
 import { useRouter } from 'expo-router';
 
  const list = () => {
@@ -27,10 +27,10 @@ import { useRouter } from 'expo-router';
 
     const addBook = async (book: any) => {
         const newBook = {
-            bookId: book.id,
-            volumeInfo: book.volumeInfo,
-            webReaderLink: book.accessInfo.webReaderLink,
-            textSnippet: book.searchInfo.textSnippet,
+            bookId: book?.id,
+            volumeInfo: book?.volumeInfo,
+            webReaderLink: book?.accessInfo?.webReaderLink,
+            textSnippet: book?.searchInfo?.textSnippet ?? "No text snippet",
             favorite: false,
             createAt: serverTimestamp()
         };
@@ -58,15 +58,16 @@ import { useRouter } from 'expo-router';
     }, []);
 
     const renderItem: ListRenderItem<any> = ({item}) => {
-        const link = '/(book)/' + item.id;
+        console.log(item);
         return (
-            <TouchableOpacity onPress={() => router.push(link as never)}>
-                <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center', marginBottom: 20 }}>
-                    <Image source={item.volumeInfo.imageLinks?.thumbnail ? { uri: item.volumeInfo.imageLinks?.thumbnail} : require("../assets/images/placeholder.jpg")}
-                    style={{ width: 50, height: 50 }}/>
-                    <View>
-                        <Text>{item.volumeInfo.title}</Text>
-                        <Text>{item.volumeInfo.authors[0]}</Text>
+            <TouchableOpacity onPress={() => router.push(`/(book)/${item?.id}`)}>
+                <View style={{ flexDirection: 'row', gap: 10, margin: 10 }}>
+                    <Image source={item?.volumeInfo?.imageLinks?.thumbnail ? { uri: item.volumeInfo.imageLinks?.thumbnail} : require("../../assets/images/placeholder.jpg")}
+                    style={{ width: 100, height: 100, borderRadius: 15 }}/>
+                    <View style={{flex: 1}}>
+                        <Text style={{ marginBottom: 5, marginTop: 5 }}>{item?.volumeInfo?.title}</Text>
+                        <Text style={{ fontSize: 12, color: '#808080', marginBottom: 10 }}>Author: {item?.volumeInfo?.authors ? item?.volumeInfo?.authors : "Undefined"}</Text>
+                        <Text style={{ flex: 1, flexWrap: 'wrap', fontSize: 11, color: '#808080' }}>{item?.textSnippet}</Text>
                     </View>
                 </View>
             </TouchableOpacity>

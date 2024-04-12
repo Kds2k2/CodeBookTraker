@@ -27,8 +27,12 @@ const login = () => {
             const user = (await signInWithEmailAndPassword(FIREBASE_AUTH, email, password)).user;
             console.log(user);
             if(user) {
-                router.replace('/list')
-                console.log("3");
+                if (user.emailVerified) 
+                {
+                    router.replace('/(tabs)/list')
+                } else {
+                    alert("Your email is not verified");
+                }
             }
         } catch(error) {
             alert("Error when login" + error);
@@ -36,6 +40,10 @@ const login = () => {
         } finally {
             setLoading(false);
         }
+    }
+
+    const handleSignUp = () => {
+        router.push('/signUp')
     }
 
     return(
@@ -72,10 +80,11 @@ const login = () => {
                 </TouchableOpacity>
         }
    </View>
-
-   <View>
-       <Text style={styles.footerText}>Don't have an account yet?</Text>
-   </View>
+   <Pressable onPress={handleSignUp}>
+        <View>
+            <Text style={styles.footerText}>Don't have an account yet?</Text>
+        </View>
+    </Pressable>
  </ScrollView>
 </SafeAreaView>
     );
