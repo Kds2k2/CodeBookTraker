@@ -1,0 +1,79 @@
+{
+    "kind": "books#volumes",
+    "totalItems": 1,
+    "items": [
+        {
+            "kind": "books#volume",
+            "id": "gLkuvgAACAAJ",
+            "etag": "ECaBgZ13kpI",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/gLkuvgAACAAJ",
+            "volumeInfo": {
+                "title": "Оно",
+                "subtitle": "[ÑÐ¾Ð¼Ð°Ð½]",
+                "authors": [
+                    "Stephen King"
+                ],
+                "publishedDate": "2011",
+                "description": "Ð Ð¼Ð°Ð»ÐµÐ½ÑÐºÐ¾Ð¼ Ð¿ÑÐ¾Ð²Ð¸Ð½ÑÐ¸Ð°Ð»ÑÐ½Ð¾Ð¼ Ð³Ð¾ÑÐ¾Ð´ÐºÐµ ÐÐµÑÑÐ¸ Ð¼Ð½Ð¾Ð³Ð¾ Ð»ÐµÑ Ð½Ð°Ð·Ð°Ð´ ÑÐµÐ¼ÐµÑÑÐ¼ Ð¿Ð¾Ð´ÑÐ¾ÑÑÐºÐ°Ð¼ Ð¿ÑÐ¸ÑÐ»Ð¾ÑÑ ÑÑÐ¾Ð»ÐºÐ½ÑÑÑÑÑ Ñ ÐºÑÐ¾Ð¼ÐµÑÐ½ÑÐ¼ ÑÐ¶Ð°ÑÐ¾Ð¼ - Ð¶Ð¸Ð²ÑÐ¼ Ð²Ð¾Ð¿Ð»Ð¾ÑÐµÐ½Ð¸ÐµÐ¼ Ð°Ð´Ð°. ÐÑÐ¾ÑÐ»Ð¸ Ð³Ð¾Ð´Ñ. ÐÐ¾Ð´ÑÐ¾ÑÑÐºÐ¸ Ð¿Ð¾Ð²Ð·ÑÐ¾ÑÐ»ÐµÐ»Ð¸, Ð¸ Ð½Ð¸ÑÑÐ¾, ÐºÐ°Ð·Ð°Ð»Ð¾ÑÑ, Ð½Ðµ Ð¿ÑÐµÐ´Ð²ÐµÑÐ°Ð»Ð¾ Ð½Ð¾Ð²Ð¾Ð¹ Ð±ÐµÐ´Ñ. ÐÐ´Ð½Ð°ÐºÐ¾....? Ð§Ð¸ÑÐ°Ð¹ÑÐµ ÐºÐ½Ð¸Ð³Ñ",
+                "industryIdentifiers": [
+                    {
+                        "type": "ISBN_10",
+                        "identifier": "5170654952"
+                    },
+                    {
+                        "type": "ISBN_13",
+                        "identifier": "9785170654956"
+                    }
+                ],
+                "readingModes": {
+                    "text": false,
+                    "image": false
+                },
+                "pageCount": 1245,
+                "printType": "BOOK",
+                "categories": [
+                    "Literary Collections"
+                ],
+                "maturityRating": "NOT_MATURE",
+                "allowAnonLogging": false,
+                "contentVersion": "preview-1.0.0",
+                "panelizationSummary": {
+                    "containsEpubBubbles": false,
+                    "containsImageBubbles": false
+                },
+                "imageLinks": {
+                    "smallThumbnail": "http://books.google.com/books/content?id=gLkuvgAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+                    "thumbnail": "http://books.google.com/books/content?id=gLkuvgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                },
+                "language": "ru",
+                "previewLink": "http://books.google.com.ua/books?id=gLkuvgAACAAJ&dq=isbn:9785170654956&hl=&cd=1&source=gbs_api",
+                "infoLink": "http://books.google.com.ua/books?id=gLkuvgAACAAJ&dq=isbn:9785170654956&hl=&source=gbs_api",
+                "canonicalVolumeLink": "https://books.google.com/books/about/%D0%9E%D0%BD%D0%BE.html?hl=&id=gLkuvgAACAAJ"
+            },
+            "saleInfo": {
+                "country": "UA",
+                "saleability": "NOT_FOR_SALE",
+                "isEbook": false
+            },
+            "accessInfo": {
+                "country": "UA",
+                "viewability": "NO_PAGES",
+                "embeddable": false,
+                "publicDomain": false,
+                "textToSpeechPermission": "ALLOWED",
+                "epub": {
+                    "isAvailable": false
+                },
+                "pdf": {
+                    "isAvailable": false
+                },
+                "webReaderLink": "http://play.google.com/books/reader?id=gLkuvgAACAAJ&hl=&source=gbs_api",
+                "accessViewStatus": "NONE",
+                "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+                "textSnippet": "Ð Ð¼Ð°Ð»ÐµÐ½ÑÐºÐ¾Ð¼ Ð¿ÑÐ¾Ð²Ð¸Ð½ÑÐ¸Ð°Ð»ÑÐ½Ð¾Ð¼ Ð³Ð¾ÑÐ¾Ð´ÐºÐµ ÐÐµÑÑÐ¸ Ð¼Ð½Ð¾Ð³Ð¾ Ð»ÐµÑ Ð½Ð°Ð·Ð°Ð´ ÑÐµÐ¼ÐµÑÑÐ¼ Ð¿Ð¾Ð´ÑÐ¾ÑÑÐºÐ°Ð¼ Ð¿ÑÐ¸ÑÐ»Ð¾ÑÑ ÑÑÐ¾Ð»ÐºÐ½ÑÑÑÑÑ Ñ ÐºÑÐ¾Ð¼ÐµÑÐ½ÑÐ¼ ÑÐ¶Ð°ÑÐ¾Ð¼ - Ð¶Ð¸Ð²ÑÐ¼ ..."
+            }
+        }
+    ]
+}
