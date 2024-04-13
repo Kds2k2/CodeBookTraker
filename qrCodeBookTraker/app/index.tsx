@@ -25,7 +25,7 @@ const index = () => {
   
   return (
     <View>
-      {user ? <Redirect href="/(tabs)/list"/> : <Redirect href="/login"/>}
+      {user ? <Redirect href="/(tabs)/list"/> : <Redirect href="/welcome"/>}
     </View>
   );
 }

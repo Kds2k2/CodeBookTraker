@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { handleSignUpEmptyFields, handleSignUpEqualPasswords } from '../services/Alert'
 import { FIREBASE_AUTH } from "../config/firebaseConfig";
 import { useRouter } from "expo-router";
+import { AntDesign } from "@expo/vector-icons";
 
 var width = Dimensions.get('window').width; 
 var height = Dimensions.get('window').height;
@@ -52,11 +53,19 @@ export const signUp = () => {
         router.replace('/login')
     };
 
+    const goBack = () => {
+        console.log("BACK");
+        router.back();
+    };
+    
     return (
         <SafeAreaView style={styles.container}>
          <ScrollView contentContainerStyle={styles.scrollView} alwaysBounceVertical={true}>
+         <TouchableOpacity onPress={goBack} style={styles.backButton}>
+            <AntDesign name="left" size={32} color="#EE9320"/>
+        </TouchableOpacity>
             <View style={styles.imageView}>
-                <Image source={require('../assets/images/react_logo.png')} style={styles.image}/>
+                <Image source={require('../assets/images/reverse_icon.png')} style={styles.image}/>
             </View>
             <Text style={styles.title}>Let's Get Started!</Text>
             <Text style={styles.subTitle}>Please enter the following information to create a new account</Text>
@@ -89,9 +98,17 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center'
     },
-    imageView: {
-        paddingTop: 40,
+    backButton: {
         flex: 1,
+        position: 'absolute',
+        top: 15,
+        left: 10,
+        width: 32,
+        height: 32
+      },
+    imageView: {
+        marginTop: 50,
+        flexWrap: 'wrap',
         justifyContent: 'center'
     },
     image: {
@@ -104,7 +121,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textTransform: "uppercase",
         textAlign: "center",
-        color: "#008CFF"
+        color: "#15191E"
     },
     subTitle: {
       fontSize: 22,
@@ -112,7 +129,7 @@ const styles = StyleSheet.create({
       textAlign: "center",
       paddingTop: 10,
       paddingBottom: 25,
-      color: "#008CFF"
+      color: "#15191E"
     },
     inputView: {
         flex: 1,
@@ -124,11 +141,13 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 50,
-        paddingHorizontal: 15,
         marginBottom: 10,
-        borderColor: '#008CFF',
+        paddingLeft: 10,
+        borderColor: '#EE9320',
         borderWidth: 1,
         borderRadius: 7,
+        color: "#15191E",
+        backgroundColor: "#F8F8F8",
         fontSize: 16
     },
     switch: {
@@ -146,9 +165,9 @@ const styles = StyleSheet.create({
         marginBottom: 15
     },
     button: {
-        backgroundColor: '#008CFF',
+        backgroundColor: '#EE9320',
         height: 40,
-        borderColor: '#006DFF',
+        borderColor: '#EE9320',
         borderWidth: 1,
         borderRadius: 5,
         alignItems: 'center',
@@ -160,9 +179,9 @@ const styles = StyleSheet.create({
         paddingTop: 25
     },
     buttonText: {
-        color: "white",
+        color: "#15191E",
         fontSize: 18,
-        fontWeight: 'bold'
+        fontWeight: 'normal'
     },
     optionsText: {
         textAlign: 'center',

@@ -75,8 +75,11 @@ import { useRouter } from 'expo-router';
     };
 
     return (<View style={styles.container}>
-        {showScanner && <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject}/>}
+        {showScanner && <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={[StyleSheet.absoluteFillObject, styles.barContainer]}>
+            <View style={{ backgroundColor: 'transparent', width: 300, height: 150, flexWrap: 'wrap', borderColor: 'white', borderRadius: 10, borderWidth: 4, alignItems: 'center' }} />
+        </BarCodeScanner>}
         {!showScanner && <FlatList
+            style={{ backgroundColor: 'white'}}
             data={books}
             renderItem={(item) => renderItem(item)}
             keyExtractor={(item) => item.id}/>
@@ -86,12 +89,19 @@ import { useRouter } from 'expo-router';
     </View>);
  };
 
+ const opacity = 'rgba(0, 0, 0, .6)';
  const styles = StyleSheet.create({
     container: {
       flex: 1
     },
+    barContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
     fab: {
-      backgroundColor: '#03A9F4',
+      backgroundColor: '#EE9320',
       alignItems: 'center',
       justifyContent: 'center',
       width: 56,
@@ -103,7 +113,7 @@ import { useRouter } from 'expo-router';
       elevation: 8,
     },
     close: {
-        backgroundColor: '#b22222',
+        backgroundColor: '#DC3D41',
         alignItems: 'center',
         justifyContent: 'center',
         width: 56,

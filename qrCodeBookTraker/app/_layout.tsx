@@ -17,9 +17,10 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
-          <Stack.Screen name="login" options={{ title: "Sign In" }} />
-          <Stack.Screen name="signUp" options={{ title: "Sign Up" }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false, headerLeft: () => null }} />
+        <Stack.Screen name="welcome" options={{ headerShown: false }} />
+          <Stack.Screen name="login" options={{ headerShown: false }} />
+          <Stack.Screen name="signUp" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ gestureEnabled: false, headerShown: false, headerLeft: () => null }} />
         </Stack>
     </ThemeProvider>
   );

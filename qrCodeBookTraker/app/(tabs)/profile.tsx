@@ -7,7 +7,7 @@ import { set, ref, update, get, child, Database } from 'firebase/database'
 
 import * as ImagePicker from 'expo-image-picker'
 import * as FileSystem from 'expo-file-system'
-import { ref as storageRef, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref as storageRef, uploadBytes } from "firebase/storage";
 
 var width = Dimensions.get('window').width; 
 var height = Dimensions.get('window').height;
@@ -51,17 +51,10 @@ export const profile = (props: any) => {
                 xhr.open('GET', uri, true);
                 xhr.send(null);
             });
+            //image.substring(image.lastIndexOf('/') + 1)
+            const reference = storageRef(FIREBASE_STORAGE, "profile4");
 
-            setImageUrl(image.substring(image.lastIndexOf('/') + 1));
-            const reference = storageRef(FIREBASE_STORAGE, "profile");
-
-            const metadata = {
-                contentType: 'image/jpeg',
-                };
-
-            await uploadBytes(reference, blob, metadata).then((snapshot) => {
-                console.log('Uploaded a blob or file!');
-                });
+            await uploadBytes(reference, blob);
             setUploading(false);
         } catch (error) {
             console.error(error);
@@ -79,22 +72,25 @@ export const profile = (props: any) => {
         }
     };
 
-    const updateData = async () => {
+    const updateData = () => {
+        if (image) {
+            uploadImage();
+        }
+
+        console.log(image);
+        
         update(ref(REALTIME_DB, 'users/' + FIREBASE_AUTH.currentUser?.uid), {
             firstName: firstName,
             lastName: lastName,
-            phone: phone,
-            imageUrl: imageUrl ?? null
+            phone: phone
         }).then(() => {
             alert("Your profile was updated!");
         }).catch((error) => {
             console.log(error);
         })
-
-        await uploadImage();
     };
 
-    const readData = async () => {
+    const readData = () => {
         const query = child(ref(REALTIME_DB), `users/${FIREBASE_AUTH.currentUser?.uid}`)
         get(query).then((snapshot) => {
             if (snapshot.exists()) {
@@ -102,10 +98,9 @@ export const profile = (props: any) => {
                 setFirstName(userProfile.firstName);
                 setLastName(userProfile.lastName);
                 setPhone(userProfile.phone);
-                setImageUrl(userProfile.imageUrl ?? "");
               } else {
                 console.log("No data available");
-              }
+            }
         }).catch((error) => {
             console.error(error);
         });
@@ -166,13 +161,14 @@ const styles = StyleSheet.create({
         borderRadius: 150 / 2,
         overflow: "hidden",
         borderWidth: 1,
-        borderColor: "#f0f8ff",
-        backgroundColor: "#f0f8ff"
+        borderColor: "#3D3D3D",
+        backgroundColor: "#F8F8F8"
     },
     text: {
-        fontSize: 16,
+        fontSize: 18,
+        textTransform: "uppercase",
         fontWeight: 'normal',
-        color: 'white',
+        color: 'black',
     },
     title: {
         fontSize: 30,
@@ -193,19 +189,21 @@ const styles = StyleSheet.create({
         height: 50,
         marginBottom: 10,
         paddingLeft: 10,
-        borderColor: '#008CFF',
+        borderColor: '#EE9320',
         borderWidth: 1,
         borderRadius: 7,
+        color: "#15191E",
+        backgroundColor: "#F8F8F8",
         fontSize: 16
     },
     placeholderInput: {
       fontSize: 14
     },
     buttonLoad: {
-        backgroundColor: '#008CFF',
+        backgroundColor: '#EE9320',
         height: 40,
-        width: "40%",
-        borderColor: '#006DFF',
+        width: "48%",
+        borderColor: '#EE9320',
         borderWidth: 1,
         borderRadius: 5,
         padding: 5,
@@ -213,10 +211,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     buttonOut: {
-        backgroundColor: '#ff0000',
-        width: "40%",
+        backgroundColor: '#DC3D41',
+        width: "48%",
         height: 40,
-        borderColor: '#b22222',
+        borderColor: '#DC3D41',
         borderWidth: 1,
         borderRadius: 5,
         padding: 5,
@@ -225,7 +223,7 @@ const styles = StyleSheet.create({
     },
     buttonView: {
         flexDirection: 'row',
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         width: "100%",
         paddingHorizontal: 15,
     },
