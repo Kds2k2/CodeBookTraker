@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Button, TextInput, View, ScrollView, SafeAreaView, Dimensions, StyleSheet, Alert, Image, TouchableOpacity, Text } from "react-native";
 
-import { signOut } from 'firebase/auth'
+import { User, signOut } from 'firebase/auth'
 import { FIREBASE_AUTH, FIRESOTRE_DB, FIREBASE_STORAGE, REALTIME_DB, FIREBASE_APP } from "../../config/firebaseConfig";
 import { set, ref, update, get, child, Database } from 'firebase/database'
 
 import * as ImagePicker from 'expo-image-picker'
 import * as FileSystem from 'expo-file-system'
-import { getDownloadURL, ref as storageRef, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, ref as storageRef, uploadBytes } from "firebase/storage";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsAuthenticated } from "../../redux/store";
+import { useRouter } from "expo-router";
 
 var width = Dimensions.get('window').width; 
 var height = Dimensions.get('window').height;
@@ -18,8 +21,10 @@ export const profile = (props: any) => {
     const [phone, setPhone] = useState("");
     const [initialize, setInitialize] = useState(true);
     const [image, setImage] = useState<any>(null);
-    const [imageUrl, setImageUrl] = useState<any>(null);
+    const [deleted, setDeleted] = useState(true);
     const [uploading, setUploading] = useState(false);
+
+    const router = useRouter();
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -51,10 +56,24 @@ export const profile = (props: any) => {
                 xhr.open('GET', uri, true);
                 xhr.send(null);
             });
-            //image.substring(image.lastIndexOf('/') + 1)
-            const reference = storageRef(FIREBASE_STORAGE, "profile4");
 
-            await uploadBytes(reference, blob);
+            console.log(FIREBASE_AUTH.currentUser?.uid);
+            const reference = storageRef(FIREBASE_STORAGE, `${FIREBASE_AUTH.currentUser?.uid}`);
+            deleteObject(reference).then(() => {
+                setDeleted(true);
+              }).catch((error) => {
+                if (error.includes("storage/bucket-not-found")) {
+                    setDeleted(false);
+                } else {
+                    console.error(error);
+                }
+              });
+              
+            console.error(deleted);
+            if (deleted) {
+                await uploadBytes(reference, blob);
+            }
+
             setUploading(false);
         } catch (error) {
             console.error(error);
@@ -65,7 +84,7 @@ export const profile = (props: any) => {
     const signout = async () => {
         try {
             await signOut(FIREBASE_AUTH).then(() => {
-                //setUser(null);
+                router.push('/welcome');
             });
         } catch(error) {
             console.log(error)
@@ -106,8 +125,19 @@ export const profile = (props: any) => {
         });
     };
 
+    const readImage = () => {
+        getDownloadURL(storageRef(FIREBASE_STORAGE, `${FIREBASE_AUTH.currentUser?.uid}`))
+          .then((url) => {
+                setImage(url);
+          })
+          .catch((error) => {
+            console.log('error1')
+          });  
+    };
+
     if(initialize) {
         readData();
+        readImage();
         setInitialize(false);
     }
 

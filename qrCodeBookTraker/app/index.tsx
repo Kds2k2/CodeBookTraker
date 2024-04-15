@@ -3,6 +3,10 @@ import { View } from 'react-native'
 import { Redirect } from 'expo-router'
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../config/firebaseConfig';
+  // store.js
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from '../redux/store';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 
 const index = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -22,11 +26,11 @@ const index = () => {
     });
     return unsubscribe;
   }, []);
-  
+
   return (
-    <View>
-      {user ? <Redirect href="/(tabs)/list"/> : <Redirect href="/welcome"/>}
-    </View>
+      <View>
+        {user ? <Redirect href="/(tabs)/list"/> : <Redirect href="/welcome"/>}
+      </View>
   );
 }
 

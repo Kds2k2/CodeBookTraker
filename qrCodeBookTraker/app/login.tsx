@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, ActivityIndicator, KeyboardAvoidingView, Vibration, Dimensions, ScrollView, SafeAreaView, Pressable, Switch, Image } from "react-native";
-import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { User, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { handleLoginEmptyFields } from '../services/Alert'
 import { FIREBASE_AUTH } from "../config/firebaseConfig";
 import { useRouter } from "expo-router";

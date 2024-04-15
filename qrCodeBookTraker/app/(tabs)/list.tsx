@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { getBookByISBN } from '../../api/books';
 
 import { addDoc, collection, onSnapshot, serverTimestamp } from 'firebase/firestore';
-import { FIRESOTRE_DB } from '../../config/firebaseConfig';
+import { FIREBASE_AUTH, FIRESOTRE_DB } from '../../config/firebaseConfig';
 import { useRouter } from 'expo-router';
 
  const list = () => {
@@ -35,11 +35,11 @@ import { useRouter } from 'expo-router';
             createAt: serverTimestamp()
         };
         //simonId = userId
-        const db = await addDoc(collection(FIRESOTRE_DB, 'users', 'simonId', 'books'), newBook);
+        const db = await addDoc(collection(FIRESOTRE_DB, 'users', `${FIREBASE_AUTH.currentUser?.uid}`, 'books'), newBook);
     }
 
     useEffect(() => {
-        const booksCollection = collection(FIRESOTRE_DB, 'users', 'simonId', 'books');
+        const booksCollection = collection(FIRESOTRE_DB, 'users', `${FIREBASE_AUTH.currentUser?.uid}`, 'books');
         onSnapshot(booksCollection, (snapshot) => {
             const books = snapshot.docs.map((doc) => {
                 return { id: doc.id, ...doc.data() };
